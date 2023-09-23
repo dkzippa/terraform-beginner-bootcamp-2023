@@ -18,3 +18,9 @@ are available as extensions to the `MAJOR.MINOR.PATCH` format.
 #### Gitpod
 - added `bin/install-terraform.sh` script to install terraform
 - fixed `.gitpod.yml` to run on every workspace start(`before`) and not only on creation(`init`)
+
+
+##### Refactor AWS cli
+- make new script
+- run it from .gitpod.yml
+- check identity is configured correctly `aws sts get-caller-identity`

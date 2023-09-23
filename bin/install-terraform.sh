@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+echo "PROJECT_ROOT: $PROJECT_ROOT"
+
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
 
 wget -O- https://apt.releases.hashicorp.com/gpg | \
@@ -18,5 +21,6 @@ sudo apt update
 
 sudo apt-get install terraform -y
 
+terraform --version
 
 
