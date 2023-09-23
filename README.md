@@ -15,3 +15,6 @@ Additional labels for pre-release and build metadata
 are available as extensions to the `MAJOR.MINOR.PATCH` format.
 
 
+#### Gitpod
+- added `bin/install-terraform.sh` script to install terraform
+- fixed `.gitpod.yml` to run on every workspace start(`before`) and not only on creation(`init`)
