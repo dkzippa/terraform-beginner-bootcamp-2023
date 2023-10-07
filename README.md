@@ -24,3 +24,8 @@ are available as extensions to the `MAJOR.MINOR.PATCH` format.
 - make new script
 - run it from .gitpod.yml
 - check identity is configured correctly `aws sts get-caller-identity`
+
+
+#### make TF random provider
+- add random provider
+- test random provider
