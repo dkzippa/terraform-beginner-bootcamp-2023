@@ -29,3 +29,8 @@ are available as extensions to the `MAJOR.MINOR.PATCH` format.
 #### make TF random provider
 - add random provider
 - test random provider
+
+
+##### create with TF simple aws s3 bucket
+- create TF simple aws s3 bucket using aws provider
+- use TF random provider

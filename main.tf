@@ -4,31 +4,34 @@ terraform {
         source = "hashicorp/random"
         version = "3.5.1"
     }
+
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.20.0"
+    }
     
   }
 }
 
-
-provider "random" {
-  
-}
-
+provider "random" {}
 
 resource "random_string" "bucket_name" {
     length = 12
     special = false
-  
+    upper = false
 }
-
-# resource "aws_s3_bucket" "aws-s3"{
-#     bucket = "my-tf-test-bucket"
-#     tags = {
-#       Name = "s3-tf-${random_string.bucket_name.id}"
-#       Environment = "Dev"
-#     }
-# }
 
 output "random_bucket_name" {
-    value = random_string.bucket_name.id
+    value = random_string.bucket_name.result
 }
 
+resource "aws_s3_bucket" "tf-s3-bucket" {
+  bucket = "tf-bootcamp-bucket-${random_string.bucket_name.result}"
+  
+  
+  tags = {
+    Name        = "TF Bootcamp test bucket"
+    Environment = "Dev"
+  }
+
+}
