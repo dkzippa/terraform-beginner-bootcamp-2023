@@ -23,4 +23,8 @@ sudo apt-get install terraform -y
 
 terraform --version
 
+shopt -s expand_aliases
+alias tf="terraform"
+tf
 
+dig
