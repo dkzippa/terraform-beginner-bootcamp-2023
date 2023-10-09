@@ -36,3 +36,6 @@ terraform.rc
 
 **/.idea/*
 **/.idea/InspectionProfiles/*
+
+
+terraform.tfvars
