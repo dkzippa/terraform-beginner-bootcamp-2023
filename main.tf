@@ -1,11 +1,5 @@
-resource "random_string" "bucket_name" {
-  length  = 12
-  special = false
-  upper   = false
-}
-
-resource "aws_s3_bucket" "tf-s3-bucket" {
-  bucket = "tf-bootcamp-bucket-${random_string.bucket_name.result}"
+resource "aws_s3_bucket" "website_bucket" {
+  bucket = var.bucket_name
 
   tags = {
     Name        = "TF Bootcamp test bucket"
