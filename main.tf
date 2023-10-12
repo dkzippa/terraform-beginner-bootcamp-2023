@@ -1,9 +1,14 @@
-resource "aws_s3_bucket" "website_bucket" {
-  bucket = var.bucket_name
+terraform {
+#  cloud {
+#    organization = "zip-all"
+#    workspaces {
+#      name = "terrahouse-01"
+#    }
+#  }
+}
 
-  tags = {
-    Name        = "TF Bootcamp test bucket"
-    Environment = "Dev"
-    UserUid     = var.user_uuid
-  }
+module "terrahouse_aws" {
+    source = "./modules/terrahouse_aws"
+    bucket_name = var.bucket_name
+    user_uuid = var.user_uuid
 }
