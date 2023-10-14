@@ -3,7 +3,7 @@
 cd $PROJECT_ROOT
 
 # Define target directory and file
-TARGET_DIR="/home/gitpod/.terraform.d"
+TARGET_DIR="$HOME/.terraform.d"
 TARGET_FILE="${TARGET_DIR}/credentials.tfrc.json"
 
 # Check if TERRAFORM_CLOUD_TOKEN is set
