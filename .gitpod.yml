@@ -1,9 +1,9 @@
 tasks:
   - name: terraform
-    env:
-        TF_LOG=DEBUG
-        TF_LOG_CORE=DEBUG
-        TF_LOG_PROVIDER=DEBUG
+    # env:
+    #     TF_LOG=DEBUG
+    #     TF_LOG_CORE=DEBUG
+    #     TF_LOG_PROVIDER=DEBUG
     before: |
       cd $PROJECT_ROOT
       source ./bin/build_tf_provider.sh
