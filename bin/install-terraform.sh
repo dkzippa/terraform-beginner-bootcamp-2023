@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd $HOME
+
 echo "PROJECT_ROOT: $PROJECT_ROOT"
 
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
@@ -26,3 +28,5 @@ terraform --version
 # shopt -s expand_aliases
 # alias tf="terraform"
 # tf
+
+cd $PROJECT_ROOT
