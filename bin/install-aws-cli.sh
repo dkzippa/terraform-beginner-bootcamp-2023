@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd $PROJECT_ROOT
+
 echo "PROJECT_ROOT: $PROJECT_ROOT"
 
 cd /workspace
