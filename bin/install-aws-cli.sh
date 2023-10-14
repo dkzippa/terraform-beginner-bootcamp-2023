@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd $PROJECT_ROOT
+cd $HOME
 
 echo "PROJECT_ROOT: $PROJECT_ROOT"
 
