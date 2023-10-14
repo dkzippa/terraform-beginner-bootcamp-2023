@@ -152,10 +152,9 @@ class TerraTownsMockServer < Sinatra::Base
     end
 
     # Validate payload data
-    name = payload["name"]
-    description = payload["description"]
-    domain_name = payload["domain_name"]
-    content_version = payload["content_version"]
+    payload_name = payload["name"]
+    payload_description = payload["description"]
+    payload_content_version = payload["content_version"]
 
     unless params[:uuid] == $home[:uuid]
       error 404, "failed to find home with provided uuid and bearer token"
@@ -163,18 +162,29 @@ class TerraTownsMockServer < Sinatra::Base
 
     home = Home.new
     home.town = $home[:town]
-    home.name = name
-    home.description = description
-    home.domain_name = domain_name
-    home.content_version = content_version
+    home.name = payload_name
+    home.description = payload_description
+    home.domain_name = $home[:domain_name]    
+    home.content_version = payload_content_version
+    # binding.pry
+
+    $home = {
+      uuid: $home[:uuid],
+      name: home.name,
+      town:  home.town,
+      description: home.description,
+      domain_name: home.domain_name,
+      content_version: home.content_version
+    }
 
     unless home.valid?
       error 422, home.errors.messages.to_json
     end
 
-    return { uuid: params[:uuid] }.to_json
+    
+    return { uuid: $home[:uuid] }.to_json
   end
-
+ 
   # DELETE
   delete '/api/u/:user_uuid/homes/:uuid' do
     ensure_correct_headings
@@ -185,9 +195,10 @@ class TerraTownsMockServer < Sinatra::Base
     if params[:uuid] != $home[:uuid]
       error 404, "failed to find home with provided uuid and bearer token"
     end
-
+    
+    uuid = $home[:uuid]
     $home = {}
-    { message: "House deleted successfully" }.to_json
+    { uuid: uuid }.to_json
   end
 end
 

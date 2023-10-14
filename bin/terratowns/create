@@ -1,10 +1,12 @@
 #! /usr/bin/bash
 
+# house id: 58fe1003-725f-492e-985e-68c568b80263
+
 user_uuid="12063a74-e954-429f-b68e-6198269a4f02" 
 token="bc8e16ca-95a6-414e-afc6-752eb27c967e"
 name="New House"
 description="A new house description"
-domain_name="3xf332sdfs.cloudfront.net"
+domain_name="d13yttg7j4uclr.cloudfront.net"
 town="cooker-cove"
 content_version=1
 
