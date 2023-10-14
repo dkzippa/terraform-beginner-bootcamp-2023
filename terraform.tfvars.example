@@ -1,2 +1,6 @@
 user_uuid="..."
 bucket_name="..."
+bearer_token="..."
+content_version = 1
+content_version = 2
+api_endpoint = "http://127.0.0.1:4567"
