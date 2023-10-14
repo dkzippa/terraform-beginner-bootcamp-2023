@@ -11,3 +11,7 @@ output "index_html_exists" {
     description = "test index_html_exists"
     value = fileexists("${path.root}/public/index.html")
 }
+output "cloudfront_url" {
+    value = module.terrahouse_aws.cloudfront_url
+}
+
