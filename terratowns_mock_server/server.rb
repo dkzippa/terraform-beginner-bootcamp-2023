@@ -9,7 +9,13 @@ class Home
   include ActiveModel::Validations
   attr_accessor :town, :name, :description, :domain_name, :content_version
 
-  validates :town, presence: true
+  validates :town, presence: true, inclusion: { in: [
+    'melomaniac-mansion',
+    'cooker-cove',
+    'video-valley',
+    'the-nomad-pad',
+    'gamers-grotto'
+  ] }
   validates :name, presence: true
   validates :description, presence: true
   validates :domain_name, 
@@ -40,11 +46,11 @@ class TerraTownsMockServer < Sinatra::Base
   end
 
   def x_access_code
-    '9b49b3fb-b8e9-483c-b703-97ba88eef8e0'
+    return 'bc8e16ca-95a6-414e-afc6-752eb27c967e'
   end
 
   def x_user_uuid
-    'e328f4ab-b99f-421c-84c9-4ccea042c7d1'
+    return '12063a74-e954-429f-b68e-6198269a4f02'
   end
 
   def find_user_by_bearer_token
@@ -79,7 +85,7 @@ class TerraTownsMockServer < Sinatra::Base
       halt 422, "Malformed JSON"
     end
 
-    # Validate payload data
+
     name = payload["name"]
     description = payload["description"]
     domain_name = payload["domain_name"]
@@ -119,8 +125,8 @@ class TerraTownsMockServer < Sinatra::Base
 
   # READ
   get '/api/u/:user_uuid/homes/:uuid' do
-    ensure_correct_headings
-    find_user_by_bearer_token
+    ensure_correct_headings()
+    find_user_by_bearer_token()
     puts "# read - GET /api/homes/:uuid"
 
     # checks for house limit
@@ -135,8 +141,8 @@ class TerraTownsMockServer < Sinatra::Base
 
   # UPDATE
   put '/api/u/:user_uuid/homes/:uuid' do
-    ensure_correct_headings
-    find_user_by_bearer_token
+    ensure_correct_headings()
+    find_user_by_bearer_token()
     puts "# update - PUT /api/homes/:uuid"
     begin
       # Parse JSON payload from the request body
