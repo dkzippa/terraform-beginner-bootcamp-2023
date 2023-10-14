@@ -1,0 +1,12 @@
+provider_installation {
+    dev_overrides {
+        "local.providers/terraform-provider-terratowns" = "/home/gitpod/.terraform.d/plugins/terraform-provider-terratowns"
+    }
+    filesystem_mirror {
+        path = "/home/gitpod/.terraform.d/plugins"
+        include = ["local.providers/*/*"]
+    }
+    direct {
+        exclude = ["local.providers/*/*"]
+    }
+}
