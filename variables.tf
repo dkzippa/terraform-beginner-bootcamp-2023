@@ -8,3 +8,11 @@ variable "bucket_name" {
 variable "content_version" {
     type = number
 }
+
+variable "bearer_token" {
+    type = string
+}
+
+variable "api_endpoint" {
+    type = string
+}
