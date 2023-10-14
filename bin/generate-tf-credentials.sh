@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd $PROJECT_ROOT
+
 # Define target directory and file
 TARGET_DIR="/home/gitpod/.terraform.d"
 TARGET_FILE="${TARGET_DIR}/credentials.tfrc.json"
@@ -27,3 +29,5 @@ cat > "$TARGET_FILE" << EOF
 EOF
 
 echo "${TARGET_FILE} has been generated."
+
+cd $PROJECT_ROOT
