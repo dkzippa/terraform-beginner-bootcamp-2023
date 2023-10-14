@@ -26,7 +26,13 @@ resource "aws_s3_object" "upload_index" {
   bucket = aws_s3_bucket.website_bucket.bucket
   source = "${path.cwd}/public/index.html"
   content_type = "text/html"
+  
   etag = filemd5("${path.cwd}/public/index.html")
+  lifecycle {
+    ignore_changes = [ etag ]
+    replace_triggered_by = [ terraform_data.content_version.output ]
+  }
+
   count = fileexists("${path.root}/public/index.html") ? 1 : 0
 }
 
@@ -35,32 +41,16 @@ resource "aws_s3_object" "upload_error" {
   bucket = aws_s3_bucket.website_bucket.bucket
   source = "${path.root}/public/error.html"
   content_type = "text/html"
+  
   etag = filemd5("${path.root}/public/error.html")
+  lifecycle {
+    ignore_changes = [ etag ]
+    replace_triggered_by = [ terraform_data.content_version.output ]
+  }
+
+
   count = fileexists("${path.root}/public/error.html") ? 1 : 0
 }
-
-# resource "aws_s3_bucket_policy" "bucket_policy" {
-#   bucket = aws_s3_bucket.website_bucket.id
-# #   policy = jsonencode({
-# #     {
-
-# #     }
-# #   })
-
-# policy = <<POLICY
-# {
-#   "Version": "2012-10-17",
-#   "Statement": [
-#     {     
-#       "Effect": "Allow",
-#       "Principal": "*",
-#       "Action": ["s3:GetObject"],
-#       "Resource": ["${aws_s3_bucket.website_bucket.arn}/*"]
-#     }
-#   ]
-# }
-# POLICY
-# }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
   bucket = aws_s3_bucket.website_bucket.bucket
@@ -83,4 +73,8 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
       }
     }
   })
+}
+
+resource "terraform_data" "content_version" {
+  input = var.content_version
 }
