@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd $PROJECT_ROOT
+cd $HOME
 
 # Check if the alias already exists in the .bash_profile
 grep -q 'alias tf="terraform"' "$HOME/.bash_profile"
