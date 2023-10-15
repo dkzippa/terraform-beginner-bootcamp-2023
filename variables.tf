@@ -12,7 +12,3 @@ variable "content_version" {
 variable "bearer_token" {
     type = string
 }
-
-variable "api_endpoint" {
-    type = string
-}
