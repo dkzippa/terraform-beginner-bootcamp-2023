@@ -5,12 +5,12 @@ terraform {
             version = "1.0.0"
         }
     }
-#  cloud {
-#    organization = "zip-all"
-#    workspaces {
-#      name = "tf-bootcamp-terrahouse"
-#    }
-#  }
+ cloud {
+   organization = "zip-all"
+   workspaces {
+     name = "tf-bootcamp-terrahouse"
+   }
+ }
 }
 
 

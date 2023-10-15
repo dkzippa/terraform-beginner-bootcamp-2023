@@ -1,6 +1,21 @@
 user_uuid="..."
-bucket_name="..."
 bearer_token="..."
-content_version = 1
-content_version = 2
-api_endpoint = "http://127.0.0.1:4567"
+
+api_endpoint = "https://terratowns.cloud/"
+# api_endpoint = "http://127.0.0.1:4567"
+
+
+test_website = {
+    bucket_name = "..."
+    webroot_path = "public/test_website"
+    town = "missingo"
+    content_version = 2
+}
+
+film_website = {
+    bucket_name = "..."
+    webroot_path = "public/film_website"    
+    town = "video-valley"    
+    content_version = 2
+}
+
