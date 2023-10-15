@@ -14,34 +14,37 @@ terraform {
 }
 
 
-#module "terrahouse_aws" {
-#    source = "./modules/terrahouse_aws"
-#    bucket_name = var.bucket_name
-#    user_uuid = var.user_uuid
-#    content_version = var.content_version
-#}
-#
+module "terrahouse_aws" {
+    source = "./modules/terrahouse_aws"
+    bucket_name = var.bucket_name
+    user_uuid = var.user_uuid
+    content_version = var.content_version
+}
+
 
 
 
 locals {
-    domain_name = "d13yttg7j4uclr.cloudfront.net"
-    town = "gamers-grotto"
-}
-
+    # domain_name = "d13yttg7j4uclr.cloudfront.net"
+    town = "missingo"
+    # town = "gamers-grotto"
+    api_endpoint = "https://terratowns.cloud/"
+    # api_endpoint = "http://127.0.0.1:4567"    
+} 
 
 provider "terratowns" {
-    endpoint = var.api_endpoint
+    endpoint = local.api_endpoint
     token = var.bearer_token
     user_uuid = var.user_uuid
 }
 
 
 resource "terratowns_home" "home" {
-    name = "How to do TF Bootcamp. v2"
-    description = "A sacred place to learn Terraform. Learn deep from the best. v2. update resource"    
-    domain_name = local.domain_name
-#    domain_name = module.terrahouse_aws.cloudfront_url
+    name = "Hey Missingo!"
+    description = "A sacred place to test the new Home. Nearly completed the TF Bootcamp..."    
+    # domain_name = local.domain_name
+    domain_name = module.terrahouse_aws.cloudfront_url
     town = local.town
-    content_version = 2
+    content_version = 1
+    depends_on = [ module.terrahouse_aws ]
 }
