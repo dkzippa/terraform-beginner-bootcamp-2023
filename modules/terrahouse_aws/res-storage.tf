@@ -8,6 +8,7 @@ resource "aws_s3_bucket" "website_bucket" {
   }
 }
 
+
 resource "aws_s3_bucket_website_configuration" "website_configuration" {
   bucket = aws_s3_bucket.website_bucket.bucket
 
@@ -24,32 +25,32 @@ resource "aws_s3_bucket_website_configuration" "website_configuration" {
 resource "aws_s3_object" "upload_index" { 
   key = "index.html"
   bucket = aws_s3_bucket.website_bucket.bucket
-  source = "${path.cwd}/public/index.html"
+  source = "${path.root}/${var.webroot_path}/index.html"
   content_type = "text/html"
   
-  etag = filemd5("${path.cwd}/public/index.html")
+  etag = filemd5("${path.root}/${var.webroot_path}/index.html")
   lifecycle {
     ignore_changes = [ etag ]
     replace_triggered_by = [ terraform_data.content_version.output ]
   }
 
-  count = fileexists("${path.root}/public/index.html") ? 1 : 0
+  count = fileexists("${path.root}/${var.webroot_path}/index.html") ? 1 : 0
 }
 
 resource "aws_s3_object" "upload_error" { 
   key = "error.html"
   bucket = aws_s3_bucket.website_bucket.bucket
-  source = "${path.root}/public/error.html"
+  source = "${path.root}/${var.webroot_path}/error.html"
   content_type = "text/html"
   
-  etag = filemd5("${path.root}/public/error.html")
+  etag = filemd5("${path.root}/${var.webroot_path}/error.html")
   lifecycle {
     ignore_changes = [ etag ]
     replace_triggered_by = [ terraform_data.content_version.output ]
   }
 
 
-  count = fileexists("${path.root}/public/error.html") ? 1 : 0
+  count = fileexists("${path.root}/${var.webroot_path}/error.html") ? 1 : 0
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {
@@ -80,11 +81,11 @@ resource "terraform_data" "content_version" {
 }
 
 resource "aws_s3_object" "upload_assets" {
-  for_each = fileset("${path.root}/public/assets/", "*.{jpg,jpeg,png,gif}")
+  for_each = fileset("${path.root}/${var.webroot_path}/assets/", "*.{jpg,jpeg,png,gif}")
   bucket = aws_s3_bucket.website_bucket.bucket
   key = "assets/${each.key}"
-  source="${path.root}/public/assets/${each.key}"
-  etag = filemd5("${path.root}/public/assets/${each.key}")
+  source="${path.root}/${var.webroot_path}/assets/${each.key}"
+  etag = filemd5("${path.root}/${var.webroot_path}/assets/${each.key}")
   
   lifecycle {
     ignore_changes = [ etag ]

@@ -24,3 +24,8 @@ variable "bucket_name" {
 variable "content_version" {
     type = number
 }
+
+variable "webroot_path" {
+  description = "Path to webroot folder with index.html, error.html and 'assets' folder"
+  type = string
+}
